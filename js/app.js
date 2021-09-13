@@ -1,17 +1,16 @@
+// Data loaded - Api call
 const loadProducts = () => {
-  const url = `https://raw.githubusercontent.com/ProgrammingHero1/ranga-store-api/main/ranga-api.json?fbclid=IwAR1CA4i5geJcpb9GPzOmqXPIlQ7KuobxBNY6GikQulCfhiG3guoyJbHCJQw`
+  const url = `https://raw.githubusercontent.com/ProgrammingHero1/ranga-store-api/main/ranga-api.json`
   fetch(url)
     .then((response) => response.json())
     .then((data) => showProducts(data));
 };
-
 
 // show all product in UI 
 const showProducts = (products) => {
   const allProducts = products.map((pd) => pd);
   for (const product of allProducts) {
     const image = product.image;
-
     const div = document.createElement("div");
     div.classList.add("product");
     div.innerHTML = `<div class="single-product">
@@ -29,6 +28,7 @@ const showProducts = (products) => {
     document.getElementById("all-products").appendChild(div);
   }
 };
+//Function  
 let count = 0;
 const addToCart = (id, price) => {
   count = count + 1;
@@ -38,6 +38,7 @@ const addToCart = (id, price) => {
   document.getElementById("total-Products").innerText = count;
 };
 
+//Common Function
 const getInputValue = (id) => {
   const element = document.getElementById(id).innerText;
   const converted = parseFloat(element);
@@ -83,7 +84,6 @@ const updateTotal = () => {
     getInputValue("price") + getInputValue("delivery-charge") +
     getInputValue("total-tax");
   document.getElementById("total").innerText = grandTotal.toFixed(2);
-  // console.log(grandTotal)
 };
 updateTotal();
 loadProducts();
